@@ -1,0 +1,45 @@
+.decl label(L:symbol)
+.input label
+
+.decl flow(L1:symbol, L2:symbol)
+.input flow
+
+.decl init(L:symbol)
+.input init
+
+.decl reach(L1:symbol, L2:symbol)
+
+reach(L, L) :- label(L).
+
+reach(L1, L2) :-
+    flow(L1, L3),
+    reach(L3, L2).
+ 
+.decl reach_without(L1:symbol, L2:symbol, D:symbol)
+
+reach_without(L,L,D) :-
+     label(L),
+     label(D),
+     L != D.
+
+reach_without(L1,L2,D) :-
+    L1 != D,
+    flow(L1, L3),
+    reach_without(L3, L2, D).
+
+.decl not_dominate(D:symbol, N:symbol)
+
+not_dominate(D, N) :- 
+     init(L),
+     reach_without(L,N,D).
+
+.decl dominate(D:symbol, N:symbol)
+.output dominate
+
+dominate(D, N) :-
+     D != N,
+     init(L),
+     reach(L, N),
+     label(D),
+     !not_dominate(D, N).
+     
