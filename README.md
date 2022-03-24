@@ -5,11 +5,10 @@ This example demonstrates how [dominators](https://en.wikipedia.org/wiki/Dominat
 The example can be executed using Docker:
 
     docker build . -t dominators-demo
-    
+    docker run dominators-demo
+
 It should print dominators as follows:
 
-    Step 9/9 : RUN head /output/*
-     ---> Running in 329af17346d9
     l1	l2
     l1	l3
     l1	l4

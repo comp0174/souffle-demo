@@ -37,4 +37,4 @@ RUN mkdir -p /output
 
 RUN souffle --fact-dir=/input --output-dir=/output dominators.dl
 
-RUN head /output/*
+CMD head /output/*
